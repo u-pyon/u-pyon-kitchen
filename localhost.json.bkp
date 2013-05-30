@@ -1,0 +1,8 @@
+// localhost.json
+[
+  "run_list" : [
+    "yum::epel",
+    "recipe[base]"
+  ]
+]
+

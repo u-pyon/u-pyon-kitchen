@@ -1,0 +1,8 @@
+{
+  "run_list":[
+    "yum::epel",
+    "nginx",
+    "recipe[base]",
+    "recipe[vim]"
+  ]
+}

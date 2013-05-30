@@ -1,0 +1,160 @@
+
+set encoding=utf-8
+set fileencodings=utf-8,sjis,iso-2022-jp,euc-jp
+set fileformats=dos,unix
+set guifont=Ricty_for_Powerline:h10
+set tabstop=2
+set noexpandtab
+set shiftwidth=2
+set softtabstop=2
+set nocompatible
+set linebreak
+
+colorscheme darkblue
+execute pathogen#infect()
+syntax on
+
+"" For NeoBundle
+" You can install plugin with :NeoBundleInstall on vim.
+" If you want to remove some plugin, delete or comment out the plugin from .vimrc and :NeoBundleClean on vim.
+filetype off
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+" originalrepos on github
+"NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'VimClojure'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neocomplcache-rsense'
+NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'git://github.com/kien/ctrlp.vim.git'
+""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'Lokaltog/vim-powerline'
+
+filetype plugin indent on     " required!
+filetype indent on
+"" /For NeoBundle
+
+
+"" vim-rspec
+
+" Run rspec on vim
+NeoBundle "skwp/vim-rspec.git"
+" let g:RspecKeyma,=0
+nnoremap <silent> ,rs :RunSpec<CR>
+nnoremap <silent> ,rl :RunSpecLine<CR>
+
+"/vim-rspec
+
+"--------------------------------------------------------------------------
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+" Enable omni completion. Not required if they are already set elsewhere in
+" .vimrc
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+"--------------------------------------------------------------------------
+" neosnippet
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable() ?
+      \"\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>"
+      \: "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ?
+      \"\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+
+"set runtimepath+=~/.vim/
+"runtime! userautoload/*.vim
+
+set autoindent
+set nobackup
+set browsedir=buffer
+" Share clipboard with windows
+set clipboard=unnamed
+" vi compatibility is Off
+"set nocompatible
+" The directory for swap files
+"set directory=$HOME/vimbackup
+" Space is inserted instead of tab
+set expandtab
+" Show other file without saving
+set hidden
+" Incremental search enable
+set incsearch
+" Show disable characters, tab, end of line and so on
+"set list
+" The format of character format with 'list'
+"set listchars=eol:$,tab:>\ ,extends:<
+" Show line numbers
+set number
+" Width of move with Shift key
+set shiftwidth=2
+" Show matched blackets
+set showmatch
+" Distinguish lowercase from uppercase
+set smartcase
+" Smart indent in creatin new line
+"set smartindent
+" The same indent is inserted on blank space with Tab key.
+set smarttab
+" Space size of Tab 
+set tabstop=2
+" Non-stop cursor on the end of line or the head of line
+set whichwrap=b,s,h,l,<,>,[,]
+" Search is not infinit loop
+set nowrapscan
+
+
+
+"-------------------------------------------------
+" Editor settings
+"-------------------------------------------------
+
+" Trim spaces of the hol and eol
+autocmd BufWritePre * :%s/\s\+$//e
+
+
+
+"-------------------------------------------------
+" User defined functions
+"-------------------------------------------------
+
+" Paste Mode
+" {{{
+let paste_mode = 0 " 0 = normal, 1 = paste
+
+function! Paste_on_off()
+    if g:paste_mode == 0
+        set paste
+        let g:paste_mode = 1
+    else
+        set nopaste
+        let g:paste_mode = 0
+    endif
+    return
+endfunc
+" }}}
+
