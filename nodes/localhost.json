@@ -3,6 +3,7 @@
     "yum::epel",
     "nginx",
     "recipe[base]",
-    "recipe[vim]"
+    "recipe[vim]",
+    "recipe[tmux]"
   ]
 }
