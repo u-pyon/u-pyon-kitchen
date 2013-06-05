@@ -4,6 +4,8 @@
     "nginx",
     "recipe[base]",
     "recipe[vim]",
-    "recipe[tmux]"
+    "recipe[tmux]",
+    "recipe[mysql::client]",
+    "recipe[mysql::server]"
   ]
 }
