@@ -1,0 +1,40 @@
+[mysql]
+default-character-set = <%= node[:mysql][:mysqld][:character_set_server] %>
+
+[mysqld]
+character-set-server = <%= node[:mysql][:mysqld][:character_set_server] %>
+datadir=<%= node[:mysql][:mysqld][:datadir] %>
+socket=<%= node[:mysql][:mysqld][:socket] %>
+pid-file=<%= node[:mysql][:mysqld][:pid_file] %>
+user=<%= node[:mysql][:mysqld][:user] %>
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=<%= node[:mysql][:mysqld][:symbolic_links] %>
+max_connections = <% node[:mysql][:mysqld][:max_connections] %>
+key_buffer = <%= node[:mysql][:mysqld][:key_buffer] %>
+max_allowed_packet = <%= node[:mysql][:mysqld][:max_allowed_packet] %>
+table_cache = <%= node[:mysql][:mysqld][:table_cache] %>
+sort_buffer_size = <%= node[:mysql][:mysqld][:sort_buffer_size] %>
+read_buffer_size = <%= node[:mysql][:mysqld][:read_buffer_size] %>
+read_rnd_buffer_size = <%= node[:mysql][:mysqld][:read_rnd_buffer_size] %>
+character_set_server = <%= node[:mysql][:mysqld][:character_set_server] %>
+innodb_data_home_dir = <%= node[:mysql][:mysqld][:innodb_data_home_dir] %>
+innodb_data_file_path = <%= node[:mysql][:mysqld][:innodb_data_file_path] %>
+innodb_file_per_table
+innodb_log_group_home_dir = <%= node[:mysql][:mysqld][:innodb_log_group_home_dir] %>
+innodb_buffer_pool_size = <%= node[:mysql][:mysqld][:innodb_buffer_pool_size] %>
+innodb_additional_mem_pool_size = <%= node[:mysql][:mysqld][:innodb_additional_mem_pool_size] %>
+innodb_log_file_size = <%= node[:mysql][:mysqld][:innodb_log_file_size] %>
+innodb_log_buffer_size = <%= node[:mysql][:mysqld][:innodb_log_buffer_size] %>
+innodb_flush_log_at_trx_commit = <%= node[:mysql][:mysqld][:innodb_flush_log_at_trx_commit] %>
+innodb_lock_wait_timeout = <%= node[:mysql][:mysqld][:innodb_lock_wait_timeout] %>
+
+log-bin
+server-id=<%= node[:mysql][:mysqld][:server_id] %>
+
+[mysqld_safe]
+log-error=<%= node[:mysql][:mysqld_safe][:log_error] %>
+pid-file=<%= node[:mysql][:mysqld_safe][:pid_file] %>
+
+[mysqldump]
+default-character-set = <%= node[:mysql][:mysqldump][:default_character_set] %>
+
