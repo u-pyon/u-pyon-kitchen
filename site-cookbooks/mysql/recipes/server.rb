@@ -23,7 +23,6 @@ execute 'mysql_chown' do
   only_if { File.exists?(node[:mysql][:mysqld][:basedir]) }
 end
 
-
 template File.join(node[:mysql][:ini_dir], 'my.cnf') do
   source 'my.cnf.erb'
   owner node[:mysql][:mysqld][:user]
