@@ -6,6 +6,7 @@
     "recipe[vim]",
     "recipe[tmux]",
     "recipe[mysql]",
-    "recipe[daemontools]"
+    "recipe[daemontools]",
+    "recipe[php]"
   ]
 }
