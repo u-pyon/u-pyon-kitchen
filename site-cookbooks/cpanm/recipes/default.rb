@@ -17,4 +17,5 @@ end
 
 execute 'install-cpanm' do
   command 'curl -L http://cpanmin.us | perl - --sudo App::cpanminus'
+  only_if { !File.exists?('/usr/local/bin/cpanm') }
 end

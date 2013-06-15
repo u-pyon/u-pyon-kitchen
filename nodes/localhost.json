@@ -1,6 +1,10 @@
 {
+  "ntp": {
+    "servers": ["ntp.nict.jp", "ntp.jst.mfeed.ad.jp"]
+  },
   "run_list":[
     "yum::epel",
+    "recipe[ntp]",
     "nginx",
     "recipe[base]",
     "recipe[vim]",
@@ -9,6 +13,7 @@
     "recipe[daemontools]",
     "recipe[php]",
     "recipe[phpfastcgi]",
-    "recipe[cpanm]"
+    "recipe[cpanm]",
+    "recipe[starman]"
   ]
 }
