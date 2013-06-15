@@ -7,6 +7,7 @@
     "recipe[tmux]",
     "recipe[mysql]",
     "recipe[daemontools]",
-    "recipe[php]"
+    "recipe[php]",
+    "recipe[phpfastcgi]"
   ]
 }

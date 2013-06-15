@@ -6,14 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-=begin
-%w(mysql mysql-server mysql-devel mysql-libs).each do |pkg|
-  package pkg do
-    action :install
-  end
-end
-=end
-
 mods = %w(server client devel shared_compat)
 
 directory '/usr/local/src' do
@@ -31,18 +23,18 @@ directory src do
   only_if { !File.exists?('/usr/local/src/mysql') }
 end
 
-execute 'mysql-download' do
-  cwd src
-  rpms = ''
-  mods.each do |mod|
-    k = 'rpm_' + mod
-    rpms += ' ' + node[:mysql][k.to_sym]
+mods.each do |mod|
+  k = 'rpm_' + mod + '_name'
+  f = File.join(src, node[:mysql][k.to_sym])
+  cookbook_file f do
+    source node[:mysql][k.to_sym]
+    mode 0755
+    owner 'root'
+    group 'root'
+    path f
   end
-  command <<-EOH
-    wget -q #{rpms}
-  EOH
-  action :run
 end
+
 
 execute 'mysql-install' do
   cwd src
@@ -112,7 +104,8 @@ service "mysqld" do
 end
 
 mods.each do |mod|
-  rpm = File.join(src, mod)
+  k = 'rpm_' + mod + '_name'
+  rpm = File.join(src, node[:mysql][k.to_sym])
   file rpm do
     action :delete
     only_if { File.exists?(rpm) }
