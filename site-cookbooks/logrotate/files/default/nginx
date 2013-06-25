@@ -1,0 +1,23 @@
+/var/log/nginx/*log {
+    daily
+    rotate 90
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+        /etc/init.d/nginx reopen_logs
+    endscript
+}
+
+/var/log/nginx/*/*log {
+    daily
+    rotate 90
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+        /etc/init.d/nginx reopen_logs
+    endscript
+}

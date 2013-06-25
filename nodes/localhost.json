@@ -10,10 +10,11 @@
     "recipe[vim]",
     "recipe[tmux]",
     "recipe[mysql]",
-    "recipe[daemontools]",
     "recipe[php]",
     "recipe[phpfastcgi]",
     "recipe[cpanm]",
-    "recipe[starman]"
+    "recipe[starman]",
+    "logrotate",
+    "recipe[daemontools]"
   ]
 }

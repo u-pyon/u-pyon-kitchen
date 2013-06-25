@@ -1,0 +1,13 @@
+/var/www/example.com/current/log/unicorn.log {
+    daily
+    rotate 90
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    lastaction
+      pid=/var/www/example.com/current/tmp/pids/unicorn.pid
+      test -s $pid && kill -USR1 "$(cat $pid)"
+    endscript
+}
+
