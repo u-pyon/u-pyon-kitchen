@@ -1,0 +1,8 @@
+{
+  "id": "oikawa",
+  "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEA+abdsihiMuGuB+Xaqv5yoDnM5Xwe92fvgWTCR8z4N8j85Dk49mjS+G+K3f+mS8Qi5VvLCzr/M3IulqI6+IBjdWkjlV+o36EIOZ5KUMzmPJLVfL/uPij2DPEPVNeQvvs/uyYt3gVJvHLg2oUyKqRKQfgKKmpnhXlJ3z72vPP8KuM= rsa-key-20120430",
+  "name": "oikawa",
+  "active": true,
+  "shell": "/bin/zsh",
+  "uid": 10001
+}
