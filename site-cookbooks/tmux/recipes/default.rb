@@ -6,14 +6,40 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-%w{mercurial ncurses-devel make gcc wget}.each do |pkg|
+
+# Warning: locked timeout error occrus, if wget, make and gcc wasn't installed before installing mercurial and ncurses-devel.
+# I solved this problem that changing 'base' recipe installing wget, make and gcc.
+%w{wget make gcc mercurial ncurses-devel}.each do |pkg|
   package pkg do
     action :install
   end
 end
+=begin
+package 'wget' do
+  action :install
+  notifies :run, 'package[make]', :immediately
+end
+package 'make' do
+  action :install
+  notifies :run, 'package[gcc]', :immediately
+end
+package 'gcc' do
+  action :install
+  notifies :run, 'package[mercurial]', :immediately
+end
+package 'mercurial' do
+  action :install
+  notifies :run, 'package[ncurses-devel]', :immediately
+end
+package 'ncurses-devel' do
+  action :install
+  notifies :run, 'package[ncurses-devel]', :immediately
+end
+=end
+
 
 src = '/tmp'
-conf = "/root/.tmux.conf"
+conf = "#{node[:tmux][:dir]}/.tmux.conf"
 
 execute "wget-tmux" do
   cwd src
@@ -26,19 +52,19 @@ end
 
 execute "install-tmux" do
   cwd src
-  command <<-EOH
-    yum -y install ./#{node[:tmux][:rpm]}
-  EOH
-  if File.exists?('/root/.tmux.conf')
+  command "yum -y install ./#{node[:tmux][:rpm]}"
+  if File.exists?(conf)
     ignore_failure true
   end
   action :nothing
 end
 
 template conf do
- notifies :run, 'execute[wget-tmux]', :immediately
- notifies :run, 'execute[install-tmux]', :immediately
- source "tmux.conf.erb"
+  owner node[:tmux][:user]
+  group node[:tmux][:user]
+  notifies :run, 'execute[wget-tmux]', :immediately
+  notifies :run, 'execute[install-tmux]', :immediately
+  source "tmux.conf.erb"
 end
 
 file conf do
@@ -47,7 +73,7 @@ end
 
 
 base_dir = node[:tmux][:base_dir]
-plconf = '/root/.tmux-powerlinerc'
+plconf = File.join(node[:tmux][:dir], '.tmux-powerlinerc')
 tmux_dir = File.join(node[:tmux][:dir], '.tmux')
 mytheme = File.join(base_dir, node[:tmux][:powerline][:name], 'themes/mythme.sh')
 execute "install-powerline" do

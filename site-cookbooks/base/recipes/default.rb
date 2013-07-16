@@ -6,7 +6,7 @@
 #
 # All rights reserved - Yuichi Oikawa
 #
-%w{zsh}.each do |pkg|
+%w{zsh git wget make gcc}.each do |pkg|
   package pkg do
     action :install
   end

@@ -6,6 +6,10 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+package 'patch' do
+  action :install
+end
+
 directory '/usr/local/src' do
   action :create
   owner 'root'
@@ -40,8 +44,8 @@ template '/etc/init/svscan.conf' do
   group 'root'
 end
 
-include_recipe 'daemontools::mysql'
-include_recipe 'daemontools::nginx'
+#include_recipe 'daemontools::mysql'
+#include_recipe 'daemontools::nginx'
 #include_recipe 'daemontools::php-fastcgi'
 
 

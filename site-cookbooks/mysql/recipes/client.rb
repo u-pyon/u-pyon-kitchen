@@ -6,10 +6,8 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-=begin
 %w(mysql mysql-client mysql-devel).each do |pkg|
   package pkg do
     action :install
   end
 end
-=end

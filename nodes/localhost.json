@@ -15,6 +15,8 @@
     "recipe[cpanm]",
     "recipe[starman]",
     "logrotate",
-    "recipe[daemontools]"
+    "recipe[daemontools]",
+    "recipe[daemontools::nginx]",
+    "recipe[daemontools::mysql]"
   ]
 }
